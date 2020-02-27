@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indovina la nota</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/mobile.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Indovina la nota</h1>
+        <button class="btn-icon" type="button" id="mic">
+          <img id="mic-image" src="assets/icons/mute.png" class="icon" />
+        </button>
+      </header>
+
+      <div class="score-container">
+        Punteggio: <span id="score" class="text-primary bold">0</span>
+      </div>
+
+      <p>
+        Prova ad indovinare la nota che viene mostrata di seguito. Attivta il
+        microfono per iniziare a giocare!
+      </p>
+
+      <img class="note-img" id="nota" />
+
+      <p class="result" id="result"></p>
+
+      <button
+        style="display: none"
+        class="btn btn--primary"
+        id="play-again"
+        type="button"
+      >
+        Prova ancora
+      </button>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
