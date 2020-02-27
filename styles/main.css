@@ -16,8 +16,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 100px 0 0 0;
-  padding: 20px;
   font-family: 'Roboto', 'serif';
   background-color: var(--color-primary-light);
 }
@@ -31,8 +29,10 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
   padding: 40px;
   border-radius: 4px;
+  max-width: 550px;
 }
 
 header {
@@ -43,7 +43,8 @@ header {
 }
 
 .note-img {
-  width: 70%;
+  margin-top: 20px;
+  width: 65%;
 }
 
 .result {
