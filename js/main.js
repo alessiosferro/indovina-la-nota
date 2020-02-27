@@ -10,6 +10,7 @@ new (class {
     this.micElement = document.getElementById('mic');
     this.micImage = document.getElementById('mic-image');
     this.scoreElement = document.getElementById('score');
+    this.resultContainer = document.getElementById('result-container');
     this.score = Number.parseInt(this.scoreElement.innerText);
 
     window.SpeechRecognition =
@@ -25,6 +26,8 @@ new (class {
     document.addEventListener('click', e => {
       if (e.target.id !== 'play-again') return;
 
+      this.resultContainer.style.opacity = '0';
+      this.resultContainer.removeChild(e.target);
       this.updateDOM();
       this.recognition.start();
     });
@@ -40,6 +43,10 @@ new (class {
         this.recognition.stop();
       }
     });
+
+    this.recognition.addEventListener('nomatch', () =>
+      this.recognition.start()
+    );
 
     this.recognition.addEventListener('result', e => {
       this.result = this.onSpeak(e);
@@ -69,8 +76,6 @@ new (class {
 
   updateDOM() {
     this.nota = this.getRandomNote();
-    this.playAgainButton.style.display = 'none';
-    this.resultElement.innerText = '';
     this.imageElement.src = `assets/img/${this.nota.src}`;
   }
 
@@ -84,14 +89,23 @@ new (class {
     switch (true) {
       case descrizione === result:
       case alternativa === result:
+        this.resultContainer.style.opacity = '1';
         this.resultElement.innerText = 'Esatto, hai indovinato!';
-        this.playAgainButton.style.display = 'block';
+
+        let button = document.createElement('button');
+        button.classList.add('btn', 'btn--primary');
+        button.id = 'play-again';
+        button.type = 'button';
+        button.innerText = 'Prova ancora';
+        this.resultContainer.insertAdjacentElement('beforeend', button);
+
         this.updateScore(5);
         return true;
 
       default:
+        this.resultContainer.style.opacity = '1';
         this.resultElement.innerText = 'Non hai indovinato. Riprova!';
-        this.updateScore(-3);
+        setTimeout(() => (this.resultContainer.style.opacity = '0'), 1200);
     }
 
     return false;
